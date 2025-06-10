@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brasil nas Olimpíadas</title>
+    <style>
+        :root {
+            --primary: #2CA845;
+            --secondary: #FEDD00;
+            --accent1: #1D5C8F;
+            --accent2: #DF0024;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent1));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .olympic-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: auto;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .country-detail {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .country-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 1rem;
+        }
+        
+        .country-flag-large {
+            width: 120px;
+            height: auto;
+            margin-right: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .country-name-large {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .country-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-card {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .medal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .medal-table th, .medal-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .medal-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .medal-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .highlight {
+            font-weight: bold;
+            color: var(--accent1);
+        }
+        
+        .top-athletes {
+            margin-top: 2rem;
+        }
+        
+        .athlete-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .athlete-card:hover {
+            transform: translateX(10px);
+        }
+        
+        .athlete-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1.5rem;
+            border: 3px solid var(--secondary);
+        }
+        
+        .athlete-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .athlete-sport {
+            font-style: italic;
+            color: #666;
+        }
+        
+        .athlete-medals {
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .gold { color: gold; }
+        .silver { color: silver; }
+        .bronze { color: #cd7f32; }
+        
+        .memorable-moments {
+            margin-top: 3rem;
+        }
+        
+        .moment-card {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--light);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        
+        .moment-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .moment-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .moment-year {
+            font-weight: bold;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .interactive-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .quiz-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quiz-option {
+            padding: 0.8rem;
+            background-color: var(--light);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quiz-option:hover {
+            background-color: var(--secondary);
+        }
+        
+        .quiz-result {
+            font-weight: bold;
+            margin-top: 1rem;
+            min-height: 24px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--secondary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            background-color: #e6c900;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #248a3d;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border: 4px solid var(--secondary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: black;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .country-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .country-flag-large {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0;
+            }
+            
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/1200px-Olympic_rings_without_rims.svg.png" alt="Logo das Olimpíadas" class="olympic-logo">
+        <div class="container">
+            <h1>Brasil nas Olimpíadas</h1>
+            <p class="subtitle">Conheça a trajetória, conquistas e curiosidades do Time Brasil em mais de um século de participação nos Jogos Olímpicos</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="country-detail">
+            <div class="country-header">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1200px-Flag_of_Brazil.svg.png" alt="Bandeira do Brasil" class="country-flag-large">
+                <h2 class="country-name-large">Time Brasil</h2>
+            </div>
+            
+            <div class="country-info-grid">
+                <div class="info-card">
+                    <h3>Primeira Participação</h3>
+                    <p>1920 (Antuérpia)</p>
+                    <p>O Brasil conquistou 3 medalhas em sua estreia, incluindo o primeiro ouro no tiro esportivo.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Total de Medalhas</h3>
+                    <p>150 (37 ouros, 42 pratas, 71 bronzes)</p>
+                    <p>Melhor desempenho: Rio 2016 (19 medalhas, sendo 7 de ouro).</p>
+                </div>
+                <div class="info-card">
+                    <h3>Esportes Dominantes</h3>
+                    <p>Vôlei, Judô, Vela, Atletismo, Natação, Ginástica</p>
+                    <p>O vôlei é o esporte com mais medalhas (14 no total).</p>
+                </div>
+                <div class="info-card">
+                    <h3>Sedes Olímpicas</h3>
+                    <p>1 vez (2016 Rio de Janeiro)</p>
+                    <p>Primeiro país sul-americano a sediar os Jogos Olímpicos.</p>
+                </div>
+            </div>
+            
+            <h3>Quadro de Medalhas (Todos os Jogos)</h3>
+            <table class="medal-table">
+                <tr>
+                    <th>Ouro</th>
+                    <th>Prata</th>
+                    <th>Bronze</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td class="highlight">37</td>
+                    <td>42</td>
+                    <td>71</td>
+                    <td>150</td>
+                </tr>
+            </table>
+            
+            <div class="interactive-section">
+                <h2>Você sabia?</h2>
+                <p>Teste seus conhecimentos sobre o Brasil nas Olimpíadas</p>
+                
+                <div class="quiz-container">
+                    <div class="quiz-question">
+                        <p>1. Qual foi o primeiro atleta brasileiro a ganhar uma medalha de ouro olímpica?</p>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, 'correct')">Guilherme Paraense (Tiro)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, 'wrong')">Adhemar Ferreira da Silva (Atletismo)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, 'wrong')">Torben Grael (Vela)</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, 'wrong')">Robert Scheidt (Vela)</div>
+                        </div>
+                        <div class="quiz-result" id="result1"></div>
+                    </div>
+                    
+                    <div class="quiz-question">
+                        <p>2. Qual esporte rendeu mais medalhas ao Brasil em todas as Olimpíadas?</p>
+                        <div class="quiz-options">
+                            <div class="quiz-option" onclick="checkAnswer(this, 'wrong')">Futebol</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, 'wrong')">Judô</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, 'correct')">Vôlei</div>
+                            <div class="quiz-option" onclick="checkAnswer(this, 'wrong')">Natação</div>
+                        </div>
+                        <div class="quiz-result" id="result2"></div>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="resetQuiz()">Reiniciar Quiz</button>
+                </div>
+            </div>
+            
+            <div class="top-athletes">
+                <h3>Maiores Atletas Brasileiros</h3>
+                <div class="athlete-card">
+                    <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcSt8n_cO2f6IwHv5iTTYxQxUI6kRxZRsdxy3wU1dDPLFO3m3fzCBD-mH2GhFCLC5Gv4WSFmWhQpyXvZxYM" alt="Torben Grael" class="athlete-img">
+                    <div class="athlete-info">
+                        <h3>Torben Grael</h3>
+                        <p class="athlete-sport">Vela</p>
+                        <p class="athlete-medals"><span class="gold">2 ouros</span>, <span class="silver">1 prata</span>, <span class="bronze">2 bronzes</span></p>
+                        <p>Maior medalhista olímpico brasileiro, competiu em 6 Olimpíadas entre 1984-2004.</p>
+                    </div>
+                </div>
+                <div class="athlete-card">
+                    <img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRguH5PmHitkaDUxfaEbaLVinTBu928Vwn0Ni0BX_HJmGlkEi6qNhw8gVga4RiaL05U1oAg41MZFtlKAKKxfKOk_w" alt="Robert Scheidt" class="athlete-img">
+                    <div class="athlete-info">
+                        <h3>Robert Scheidt</h3>
+                        <p class="athlete-sport">Vela</p>
+                        <p class="athlete-medals"><span class="gold">2 ouros</span>, <span class="silver">2 pratas</span>, <span class="bronze">1 bronze</span></p>
+                        <p>Um dos maiores velejadores da história, medalhista em 5 Olimpíadas consecutivas.</p>
+                    </div>
+                </div>
+                <div class="athlete-card">
+                    <img src="data:image/webp;base64,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" alt="Serginho" class="athlete-img">
+                    <div class="athlete-info">
+                        <h3>Serginho</h3>
+                        <p class="athlete-sport">Vôlei</p>
+                        <p class="athlete-medals"><span class="gold">2 ouros</span>, <span class="silver">2 pratas</span></p>
+                        <p>Maior líbero da história do vôlei, peça fundamental nas conquistas olímpicas.</p>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="openModal('athletes-modal')">Ver mais atletas</button>
+            </div>
+            
+            <div class="memorable-moments">
+                <h3>Momentos Históricos</h3>
+                <div class="moment-card">
+                    <span class="moment-year">1920 Antuérpia</span>
+                    <h3>Primeiras medalhas</h3>
+                    <p>O Brasil conquistou 3 medalhas em sua estreia olímpica: ouro no tiro com Guilherme Paraense, prata no tiro por equipes e bronze no salto em altura com Afrânio da Costa.</p>
+                </div>
+                <div class="moment-card">
+                    <span class="moment-year">1952 Helsinque</span>
+                    <h3>O bicampeão Adhemar</h3>
+                    <p>Adhemar Ferreira da Silva se tornou o primeiro bicampeão olímpico brasileiro no salto triplo, batendo o recorde mundial em ambas as Olimpíadas (1952 e 1956).</p>
+                </div>
+                <div class="moment-card">
+                    <span class="moment-year">1996 Atlanta</span>
+                    <h3>Ouro no vôlei masculino</h3>
+                    <p>A geração de ouro do vôlei brasileiro conquistou seu primeiro título olímpico, derrotando a Itália em uma final emocionante.</p>
+                </div>
+                <div class="moment-card">
+                    <span class="moment-year">2016 Rio</span>
+                    <h3>Jogos em casa</h3>
+                    <p>O Brasil sediou os primeiros Jogos Olímpicos na América do Sul e teve seu melhor desempenho com 7 ouros, 6 pratas e 6 bronzes.</p>
+                </div>
+            </div>
+            
+            <div class="interactive-section">
+                <h2>Linha do Tempo Olímpica do Brasil</h2>
+                <p>Principais marcos da participação brasileira nos Jogos</p>
+                
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1920</div>
+                            <h3>Estreia Olímpica</h3>
+                            <p>Primeira participação do Brasil nos Jogos, com 3 medalhas conquistadas.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1952</div>
+                            <h3>Primeiro bicampeão</h3>
+                            <p>Adhemar Ferreira da Silva conquista o ouro no salto triplo, repetindo o feito em 1956.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1980</div>
+                            <h3>Primeiro ouro feminino</h3>
+                            <p>Equipe de vôlei feminino conquista o bronze, primeira medalha olímpica feminina do Brasil.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <div class="timeline-year">1996</div>
+                            <h3>Geração de ouro</h3>
+                            <p>Vôlei masculino conquista o primeiro ouro olímpico do esporte.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <div class="timeline-year">2016</div>
+                            <h3>Jogos no Brasil</h3>
+                            <p>Rio de Janeiro sedia os primeiros Jogos Olímpicos na América do Sul.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="interactive-section">
+                <h2>Curiosidades Olímpicas</h2>
+                <p>Dados interessantes sobre a participação brasileira</p>
+                
+                <button class="btn" onclick="showRandomFact()">Mostrar Curiosidade</button>
+                <div id="random-fact" style="margin-top: 1rem; padding: 1rem; background-color: white; color: var(--dark); border-radius: 8px;"></div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="modal" id="athletes-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('athletes-modal')">&times;</span>
+            <h2>Outros Grandes Atletas Brasileiros</h2>
+            
+            <div class="athlete-card">
+                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTBTa77e-CICzzlOZQcxPJWNEYf-YQJbz_rvZNzlTDIXtI1Tq323kgBbBaxQB51VdW3rQFVQQ2rOq8WNlZm6SOrOcLQPEK5lu-Coc2BcQk" alt="Adhemar Ferreira da Silva" class="athlete-img">
+                <div class="athlete-info">
+                    <h3>Adhemar Ferreira da Silva</h3>
+                    <p class="athlete-sport">Atletismo (Salto Triplo)</p>
+                    <p class="athlete-medals"><span class="gold">2 ouros</span></p>
+                    <p>Primeiro bicampeão olímpico brasileiro (1952 e 1956), quebrou o recorde mundial em ambas as ocasiões.</p>
+                </div>
+            </div>
+            
+            <div class="athlete-card">
+                <img src="data:image/jpeg;base64,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" alt="Martine Grael e Kahena Kunze" class="athlete-img">
+                <div class="athlete-info">
+                    <h3>Martine Grael & Kahena Kunze</h3>
+                    <p class="athlete-sport">Vela (Classe 49er FX)</p>
+                    <p class="athlete-medals"><span class="gold">2 ouros</span></p>
+                    <p>Bicampeãs olímpicas (2016 e 2020), continuando o legado da família Grael nas Olimpíadas.</p>
+                </div>
+            </div>
+            
+            <div class="athlete-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToE37BAcsF0AbLhppg6hSjLQpGaOBVPsObQg&s" alt="Arthur Zanetti" class="athlete-img">
+                <div class="athlete-info">
+                    <h3>Arthur Zanetti</h3>
+                    <p class="athlete-sport">Ginástica (Argolas)</p>
+                    <p class="athlete-medals"><span class="gold">1 ouro</span>, <span class="silver">1 prata</span></p>
+                    <p>Primeiro medalhista olímpico brasileiro na ginástica artística, ouro em Londres 2012.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Time Brasil - Todos os direitos reservados</p>
+            <p>Dados históricos das Olimpíadas - Comitê Olímpico Brasileiro</p>
+        </div>
+    </footer>
+    
+    <script>
+
+        function checkAnswer(element, answer) {
+            const questionDiv = element.parentElement.parentElement;
+            const resultDiv = questionDiv.querySelector('.quiz-result');
+            
+            const options = questionDiv.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.backgroundColor = '';
+            });
+            
+            if (answer === 'correct') {
+                element.style.backgroundColor = '#d4edda';
+                resultDiv.textContent = '✓ Resposta Correta!';
+                resultDiv.style.color = 'green';
+            } else {
+                element.style.backgroundColor = '#f8d7da';
+                resultDiv.textContent = '✗ Resposta Incorreta';
+                resultDiv.style.color = 'red';
+               
+                options.forEach(opt => {
+                    if (opt.textContent.includes('Guilherme Paraense') || 
+                        opt.textContent.includes('Vôlei')) {
+                        opt.style.backgroundColor = '#d4edda';
+                    }
+                });
+            }
+        }
+        
+        function resetQuiz() {
+            const results = document.querySelectorAll('.quiz-result');
+            results.forEach(result => {
+                result.textContent = '';
+            });
+            
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.backgroundColor = '';
+            });
+        }
+        
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        const facts = [
+            "O Brasil é o único país a ter conquistado medalhas de ouro em todas as edições do vôlei de quadra desde que o esporte entrou no programa olímpico (1984-2020).",
+            "Nos Jogos de 2016, o Brasil conquistou sua primeira medalha olímpica no futebol feminino (prata).",
+            "O judoca Aurélio Miguel foi o primeiro brasileiro a conquistar medalhas em Olimpíadas consecutivas (bronze em 1988 e ouro em 1996).",
+            "O nadador César Cielo detém o recorde olímpico dos 50m livre (21s30) estabelecido em Pequim 2008.",
+            "O Brasil já conquistou medalhas em 22 esportes olímpicos diferentes.",
+            "A vela é o esporte individual que mais rendeu medalhas ao Brasil (18 no total).",
+            "Em 2020, o Brasil conquistou sua primeira medalha no skate, esporte que estreou nessa edição (prata de Kelvin Hoefler)."
+        ];
+        
+        function showRandomFact() {
+            const randomIndex = Math.floor(Math.random() * facts.length);
+            document.getElementById('random-fact').textContent = facts[randomIndex];
+        }
+        
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
