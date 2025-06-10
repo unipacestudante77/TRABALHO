@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olimpíadas - História e Curiosidades</title>
+    <style>
+        :root {
+            --primary: #0085C7;
+            --secondary: #F4C300;
+            --accent1: #009F3D;
+            --accent2: #DF0024;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent1));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .olympic-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: auto;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            padding: 1rem 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 3rem auto;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -12px;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .country-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .country-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .country-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .country-flag {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .country-flag img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        
+        .country-name {
+            padding: 1rem;
+            font-weight: bold;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        .modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .modal-flag {
+            width: 100px;
+            height: auto;
+            margin-right: 2rem;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .medal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        .medal-table th, .medal-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .medal-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .medal-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .highlight {
+            font-weight: bold;
+            color: var(--accent2);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            color: white;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .olympic-logo {
+                position: static;
+                margin-bottom: 1rem;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
+            
+            .left::after, .right::after {
+                left: 21px;
+            }
+            
+            .right {
+                left: 0;
+            }
+            
+            .modal-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .modal-flag {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+        
+        <div style="text-align: center; margin: 3rem 0;">
+            <button onclick="window.location.href='olimpiadas-pagina2.html'" 
+                    style="padding: 1rem 2rem; 
+                           background: linear-gradient(to right, var(--primary), var(--accent1));
+                           color: white; 
+                           border: none; 
+                           border-radius: 50px; 
+                           font-size: 1.1rem; 
+                           cursor: pointer; 
+                           transition: all 0.3s ease;
+                           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                 &rarr;
+            </button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2025 Olimpíadas - História e Curiosidades</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+        function openModal(country) {
+            document.getElementById(country + 'Modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/1200px-Olympic_rings_without_rims.svg.png" alt="Logo das Olimpíadas" class="olympic-logo">
+        <div class="container">
+            <h1>Jogos Olímpicos</h1>
+            <p class="subtitle">Uma celebração global do esporte, unindo nações e atletas em competição e camaradagem desde a antiguidade.</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#historia">História</a></li>
+            <li><a href="#curiosidades">Curiosidades</a></li>
+            <li><a href="#paises">Melhores Países</a></li>
+            <li><a href="#medalhas">Medalhas</a></li>
+            <li><a href="#importancia">Importância</a></li>
+        </ul>
+    </nav>
+    
+    <main class="container">
+        <section id="historia">
+            <h2 class="section-title">História das Olimpíadas</h2>
+            <p>Os Jogos Olímpicos têm suas raízes na Grécia Antiga, onde eram realizados em Olímpia a partir de 776 a.C. como parte de um festival religioso em honra a Zeus. Os jogos antigos continuaram até 393 d.C., quando foram banidos pelo imperador romano Teodósio I por serem uma festividade pagã.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1896</div>
+                        <p>Primeiros Jogos Olímpicos da era moderna realizados em Atenas, Grécia, por iniciativa do Barão Pierre de Coubertin.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1924</div>
+                        <p>Primeiros Jogos Olímpicos de Inverno realizados em Chamonix, França.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <div class="timeline-year">1960</div>
+                        <p>Primeiros Jogos Paraolímpicos realizados em Roma, Itália, para atletas com deficiência.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2021</div>
+                        <p>Jogos Olímpicos de Tóquio adiados para 2021 devido à pandemia de COVID-19, mantendo o nome "Tóquio 2020".</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="curiosidades">
+            <h2 class="section-title">Curiosidades Olímpicas</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHB5CCsiaFrSTzVjbzDSx1q2uaGtF3D4N2ph0YTkXlNlb5YLi0_APwmRAO&s=10" alt="Tocha Olímpica">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Tocha Olímpica</h3>
+                        <p>A chama olímpica é acesa em Olímpia, Grécia, usando um espelho parabólico para focar os raios do sol. A tocha então viaja pelo mundo até o local dos Jogos.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt9cnT8m0cu7sfCLZy08yhbFI7m0SZ-4nSvrgVMYDSKFSFgkWIDVdoQS7W&s=10" alt="Medalhas">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Composição das Medalhas</h3>
+                        <p>As medalhas de ouro devem conter pelo menos 6 gramas de ouro puro, mas são principalmente feitas de prata. As medalhas de prata são de prata pura, e as de bronze são feitas de cobre com estanho.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiSlRYdDw1gIqzcPTQnY2ynpaozWPauLGM2LWNJJjxGma5BlGPqfK33GwI&s=10" alt="Anéis Olímpicos">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Os Anéis Olímpicos</h3>
+                        <p>Os cinco anéis entrelaçados representam os cinco continentes habitados: África, América, Ásia, Europa e Oceania. As cores (azul, amarelo, preto, verde e vermelho) foram escolhidas porque pelo menos uma delas aparece na bandeira de cada país.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="paises">
+            <h2 class="section-title">Top 5 Países Olímpicos</h2>
+            <p class="text-center" style="margin-bottom: 2rem;">Clique em um país para ver seus detalhes e conquistas</p>
+            
+            <div class="country-grid">
+                <div class="country-card" onclick="openModal('usa')">
+                    <div class="country-flag">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png" alt="Bandeira EUA">
+                    </div>
+                    <div class="country-name">Estados Unidos</div>
+                </div>
+                
+                <div class="country-card" onclick="openModal('russia')">
+                    <div class="country-flag">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Flag_of_Russia.svg/1200px-Flag_of_Russia.svg.png" alt="Bandeira Rússia">
+                    </div>
+                    <div class="country-name">Rússia/URSS</div>
+                </div>
+                
+                <div class="country-card" onclick="openModal('germany')">
+                    <div class="country-flag">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1200px-Flag_of_Germany.svg.png" alt="Bandeira Alemanha">
+                    </div>
+                    <div class="country-name">Alemanha</div>
+                </div>
+                
+                <div class="country-card" onclick="openModal('uk')">
+                    <div class="country-flag">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png" alt="Bandeira Reino Unido">
+                    </div>
+                    <div class="country-name">Reino Unido</div>
+                </div>
+                
+                <div class="country-card" onclick="openModal('china')">
+                    <div class="country-flag">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1200px-Flag_of_the_People%27s_Republic_of_China.svg.png" alt="Bandeira China">
+                    </div>
+                    <div class="country-name">China</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="medalhas">
+            <h2 class="section-title">Quadro de Medalhas</h2>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">1.127</div>
+                    <div class="stat-label">Estados Unidos</div>
+                    <p>O país mais bem-sucedido na história das Olimpíadas, com destaque em natação, atletismo e basquete.</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1.010</div>
+                    <div class="stat-label">URSS/Equipa Unificada/Rússia</div>
+                    <p>Inclui medalhas conquistadas pela União Soviética, Equipa Unificada em 1992 e Rússia.</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">780</div>
+                    <div class="stat-label">Alemanha</div>
+                    <p>Inclui medalhas da Alemanha Ocidental, Oriental e unificada, com força em esportes como canoagem e atletismo.</p>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 3rem; text-align: center;">Brasil nas Olimpíadas</h3>
+            <div class="stats-container" style="margin-top: 1rem;">
+                <div class="stat-card">
+                    <div class="stat-number">37</div>
+                    <div class="stat-label">Ouros</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">42</div>
+                    <div class="stat-label">Pratas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">71</div>
+                    <div class="stat-label">Bronzes</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="importancia">
+            <h2 class="section-title">Importância das Olimpíadas</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">União dos Povos</h3>
+                        <p>As Olimpíadas representam um momento único de união entre nações, onde atletas de diferentes culturas, religiões e sistemas políticos competem em igualdade sob os mesmos ideais olímpicos.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Desenvolvimento Esportivo</h3>
+                        <p>Os Jogos impulsionam o desenvolvimento de infraestrutura esportiva nos países sede e incentivam a prática de esportes em todo o mundo, promovendo saúde e qualidade de vida.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Legado Cultural</h3>
+                        <p>Cada edição dos Jogos deixa um legado cultural único, mostrando ao mundo as tradições e inovações do país anfitrião, além de promover o turismo e o intercâmbio cultural.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3 class="card-title">Superação Humana</h3>
+                        <p>As Olimpíadas celebram a superação dos limites humanos, com recordes sendo quebrados a cada edição, inspirando milhões de pessoas a perseguirem seus objetivos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="usaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('usaModal')">&times;</span>
+            <div class="modal-header">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png" alt="Bandeira EUA" class="modal-flag">
+                <h2 class="modal-title">Estados Unidos nas Olimpíadas</h2>
+            </div>
+            
+            <p>Os Estados Unidos são o país mais bem-sucedido na história dos Jogos Olímpicos, tendo sediado os Jogos por oito vezes (quatro de verão e quatro de inverno).</p>
+            
+            <h3>Destaques:</h3>
+            <ul>
+                <li>Maior medalhista olímpico: Michael Phelps (natação) - 28 medalhas (23 ouros)</li>
+                <li>Esportes dominantes: Natação, Atletismo, Basquete, Ginástica</li>
+                <li>Primeira participação: 1896 (primeiros Jogos da era moderna)</li>
+            </ul>
+            
+            <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+            <table class="medal-table">
+                <tr>
+                    <th>Ouro</th>
+                    <th>Prata</th>
+                    <th>Bronze</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td class="highlight">1.022</td>
+                    <td>795</td>
+                    <td>706</td>
+                    <td>2.523</td>
+                </tr>
+            </table>
+            
+            <h3>Marcos Históricos:</h3>
+            <ul>
+                <li><strong>1936 Berlin:</strong> Jesse Owens vence 4 ouros no atletismo, desafiando a ideologia nazista</li>
+                <li><strong>1980 Lake Placid:</strong> "Milagre no Gelo" - time de hóquei amador vence a poderosa URSS</li>
+                <li><strong>1996 Atlanta:</strong> Muhammad Ali acende a pira olímpica em momento emocionante</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="russiaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('russiaModal')">&times;</span>
+            <div class="modal-header">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Flag_of_Russia.svg/1200px-Flag_of_Russia.svg.png" alt="Bandeira Rússia" class="modal-flag">
+                <h2 class="modal-title">Rússia/URSS nas Olimpíadas</h2>
+            </div>
+            
+            <p>A Rússia e a antiga União Soviética têm uma história rica nos Jogos Olímpicos, sendo uma das potências esportivas mais dominantes, especialmente durante a Guerra Fria.</p>
+            
+            <h3>Destaques:</h3>
+            <ul>
+                <li>Maior medalhista olímpico: Larisa Latynina (ginástica) - 18 medalhas (9 ouros)</li>
+                <li>Esportes dominantes: Ginástica, Lutas, Atletismo, Halterofilismo</li>
+                <li>Primeira participação: 1900 (como Rússia), retornou em 1952 (como URSS)</li>
+            </ul>
+            
+            <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+            <table class="medal-table">
+                <tr>
+                    <th>Ouro</th>
+                    <th>Prata</th>
+                    <th>Bronze</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td class="highlight">395</td>
+                    <td>319</td>
+                    <td>296</td>
+                    <td>1.010</td>
+                </tr>
+            </table>
+            
+            <h3>Marcos Históricos:</h3>
+            <ul>
+                <li><strong>1956 Melbourne:</strong> URSS domina os Jogos pela primeira vez, liderando o quadro de medalhas</li>
+                <li><strong>1972 Munique:</strong> Time de basquete perde controversamente para os EUA na final</li>
+                <li><strong>2014 Sochi:</strong> Primeiros Jogos Olímpicos de Inverno sediados na Rússia</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="germanyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('germanyModal')">&times;</span>
+            <div class="modal-header">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1200px-Flag_of_Germany.svg.png" alt="Bandeira Alemanha" class="modal-flag">
+                <h2 class="modal-title">Alemanha nas Olimpíadas</h2>
+            </div>
+            
+            <p>A Alemanha tem uma longa tradição olímpica, participando desde os primeiros Jogos da era moderna. Sua história inclui períodos como Alemanha unida, dividida (RDA e RFA) e reunificada.</p>
+            
+            <h3>Destaques:</h3>
+            <ul>
+                <li>Maior medalhista olímpico: Birgit Fischer (canoagem) - 8 ouros em 6 Olimpíadas</li>
+                <li>Esportes dominantes: Canoagem, Atletismo, Hipismo, Remo</li>
+                <li>Primeira participação: 1896</li>
+            </ul>
+            
+            <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+            <table class="medal-table">
+                <tr>
+                    <th>Ouro</th>
+                    <th>Prata</th>
+                    <th>Bronze</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td class="highlight">283</td>
+                    <td>282</td>
+                    <td>290</td>
+                    <td>855</td>
+                </tr>
+            </table>
+            
+            <h3>Marcos Históricos:</h3>
+            <ul>
+                <li><strong>1936 Berlin:</strong> Primeiros Jogos televisionados, usados como propaganda nazista</li>
+                <li><strong>1972 Munique:</strong> Massacre de atletas israelenses por terroristas palestinos</li>
+                <li><strong>2016 Rio:</strong> Equipe alemã de futebol masculino conquista o primeiro ouro</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="ukModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('ukModal')">&times;</span>
+            <div class="modal-header">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png" alt="Bandeira Reino Unido" class="modal-flag">
+                <h2 class="modal-title">Reino Unido nas Olimpíadas</h2>
+            </div>
+            
+            <p>O Reino Unido é o único país a ter ganho pelo menos uma medalha de ouro em todos os Jogos Olímpicos de Verão, demonstrando uma consistência impressionante ao longo da história.</p>
+            
+            <h3>Destaques:</h3>
+            <ul>
+                <li>Maior medalhista olímpico: Jason Kenny (ciclismo) - 7 ouros</li>
+                <li>Esportes dominantes: Ciclismo, Remo, Atletismo, Vela</li>
+                <li>Primeira participação: 1896</li>
+                <li>Sediou os Jogos 3 vezes: 1908, 1948 e 2012 (Londres)</li>
+            </ul>
+            
+            <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+            <table class="medal-table">
+                <tr>
+                    <th>Ouro</th>
+                    <th>Prata</th>
+                    <th>Bronze</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td class="highlight">263</td>
+                    <td>295</td>
+                    <td>293</td>
+                    <td>851</td>
+                </tr>
+            </table>
+            
+            <h3>Marcos Históricos:</h3>
+            <ul>
+                <li><strong>1908 London:</strong> Maior domínio olímpico, conquistando 56 ouros</li>
+                <li><strong>2012 London:</strong> "Super Saturday" - 3 ouros no atletismo em 44 minutos</li>
+                <li><strong>2016 Rio:</strong> Segundo lugar no quadro de medalhas, melhor desempenho desde 1908</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="chinaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('chinaModal')">&times;</span>
+            <div class="modal-header">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1200px-Flag_of_the_People%27s_Republic_of_China.svg.png" alt="Bandeira China" class="modal-flag">
+                <h2 class="modal-title">China nas Olimpíadas</h2>
+            </div>
+            
+            <p>A China emergiu como potência olímpica nas últimas décadas, especialmente após sediar os Jogos de 2008 em Pequim, quando liderou o quadro de medalhas pela primeira vez.</p>
+            
+            <h3>Destaques:</h3>
+            <ul>
+                <li>Maior medalhista olímpico: Wu Minxia (saltos ornamentais) - 5 ouros</li>
+                <li>Esportes dominantes: Tênis de mesa, Badminton, Saltos Ornamentais, Halterofilismo</li>
+                <li>Primeira participação: 1932 (como República da China)</li>
+                <li>Retornou em 1984 (como República Popular da China)</li>
+            </ul>
+            
+            <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+            <table class="medal-table">
+                <tr>
+                    <th>Ouro</th>
+                    <th>Prata</th>
+                    <th>Bronze</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td class="highlight">224</td>
+                    <td>167</td>
+                    <td>155</td>
+                    <td>546</td>
+                </tr>
+            </table>
+            
+            <h3>Marcos Históricos:</h3>
+            <ul>
+                <li><strong>1984 Los Angeles:</strong> Xu Haifeng ganha o primeiro ouro chinês no tiro esportivo</li>
+                <li><strong>2008 Beijing:</strong> Cerimônia de abertura espetacular e liderança no quadro de medalhas</li>
+                <
