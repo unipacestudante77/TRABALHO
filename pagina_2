@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes dos Países Olímpicos</title>
+    <style>
+        :root {
+            --primary: #0085C7;
+            --secondary: #F4C300;
+            --accent1: #009F3D;
+            --accent2: #DF0024;
+            --dark: #1A1A1A;
+            --light: #F5F5F5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent1));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .olympic-logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: auto;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            padding: 1rem 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-img img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+        
+        .country-detail {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .country-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--light);
+            padding-bottom: 1rem;
+        }
+        
+        .country-flag-large {
+            width: 120px;
+            height: auto;
+            margin-right: 2rem;
+        }
+        
+        .country-name-large {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .country-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-card {
+            background-color: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .medal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        .medal-table th, .medal-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .medal-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .medal-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .highlight {
+            font-weight: bold;
+            color: var(--accent2);
+        }
+        
+        .top-athletes {
+            margin-top: 2rem;
+        }
+        
+        .athlete-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .athlete-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1.5rem;
+        }
+        
+        .athlete-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .athlete-sport {
+            font-style: italic;
+            color: #666;
+        }
+        
+        .athlete-medals {
+            margin-top: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .gold { color: gold; }
+        .silver { color: silver; }
+        .bronze { color: #cd7f32; }
+        
+        .memorable-moments {
+            margin-top: 3rem;
+        }
+        
+        .moment-card {
+            margin-bottom: 2rem;
+        }
+        
+        .moment-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .moment-year {
+            font-weight: bold;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .social-links a {
+            color: white;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background-color: var(--accent1);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .olympic-logo {
+                position: static;
+                margin-bottom: 1rem;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .country-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .country-flag-large {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .country-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/1200px-Olympic_rings_without_rims.svg.png" alt="Logo das Olimpíadas" class="olympic-logo">
+        <div class="container">
+            <h1>Detalhes dos Países Olímpicos</h1>
+            <p class="subtitle">Conheça em profundidade as histórias, conquistas e curiosidades dos principais países nas Olimpíadas</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#usa">Estados Unidos</a></li>
+            <li><a href="#russia">Rússia/URSS</a></li>
+            <li><a href="#germany">Alemanha</a></li>
+            <li><a href="#uk">Reino Unido</a></li>
+            <li><a href="#china">China</a></li>
+        </ul>
+    </nav>
+    
+    <main class="container">
+        <section id="usa">
+            <div class="country-detail">
+                <div class="country-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1200px-Flag_of_the_United_States.svg.png" alt="Bandeira EUA" class="country-flag-large">
+                    <h2 class="country-name-large">Estados Unidos</h2>
+                </div>
+                
+                <div class="country-info-grid">
+                    <div class="info-card">
+                        <h3>Primeira Participação</h3>
+                        <p>1896 (Atenas)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Total de Medalhas</h3>
+                        <p>2.523 (Verão) + 330 (Inverno)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Esportes Dominantes</h3>
+                        <p>Natação, Atletismo, Basquete, Ginástica</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Sedes Olímpicas</h3>
+                        <p>8 vezes (4 Verão: 1904, 1932, 1984, 1996; 4 Inverno: 1932, 1960, 1980, 2002)</p>
+                    </div>
+                </div>
+                
+                <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+                <table class="medal-table">
+                    <tr>
+                        <th>Ouro</th>
+                        <th>Prata</th>
+                        <th>Bronze</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td class="highlight">1.022</td>
+                        <td>795</td>
+                        <td>706</td>
+                        <td>2.523</td>
+                    </tr>
+                </table>
+                
+                <div class="top-athletes">
+                    <h3>Maiores Atletas</h3>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Michael_Phelps_Rio_2016.jpg/220px-Michael_Phelps_Rio_2016.jpg" alt="Michael Phelps" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Michael Phelps</h3>
+                            <p class="athlete-sport">Natação</p>
+                            <p class="athlete-medals"><span class="gold">23 ouros</span>, <span class="silver">3 pratas</span>, <span class="bronze">2 bronzes</span></p>
+                            <p>Maior medalhista olímpico da história em qualquer esporte.</p>
+                        </div>
+                    </div>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Carl_Lewis_2009b.jpg/220px-Carl_Lewis_2009b.jpg" alt="Carl Lewis" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Carl Lewis</h3>
+                            <p class="athlete-sport">Atletismo</p>
+                            <p class="athlete-medals"><span class="gold">9 ouros</span>, <span class="silver">1 prata</span></p>
+                            <p>Dominou as provas de velocidade e salto em distância nos anos 80 e 90.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="memorable-moments">
+                    <h3>Momentos Memoráveis</h3>
+                    <div class="moment-card">
+                        <span class="moment-year">1936 Berlim</span>
+                        <h3>Jesse Owens desafia Hitler</h3>
+                        <p>Jesse Owens conquistou 4 medalhas de ouro no atletismo, desafiando a ideologia nazista de superioridade ariana diante do próprio Hitler.</p>
+                    </div>
+                    <div class="moment-card">
+                        <span class="moment-year">1980 Lake Placid</span>
+                        <h3>Milagre no Gelo</h3>
+                        <p>O time amador de hóquei dos EUA derrotou a poderosa equipe soviética, considerada a maior zebra da história olímpica.</p>
+                    </div>
+                    <div class="moment-card">
+                        <span class="moment-year">1996 Atlanta</span>
+                        <h3>Muhammad Ali acende a pira</h3>
+                        <p>O ex-campeão de boxe, já com Parkinson, acendeu a pira olímpica em um dos momentos mais emocionantes da história das cerimônias.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="russia">
+            <div class="country-detail">
+                <div class="country-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Flag_of_Russia.svg/1200px-Flag_of_Russia.svg.png" alt="Bandeira Rússia" class="country-flag-large">
+                    <h2 class="country-name-large">Rússia/URSS</h2>
+                </div>
+                
+                <div class="country-info-grid">
+                    <div class="info-card">
+                        <h3>Primeira Participação</h3>
+                        <p>1900 (como Rússia), 1952 (como URSS)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Total de Medalhas</h3>
+                        <p>1.010 (Verão) + 342 (Inverno)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Esportes Dominantes</h3>
+                        <p>Ginástica, Lutas, Atletismo, Halterofilismo</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Sedes Olímpicas</h3>
+                        <p>1 vez (1980 Verão em Moscou, 2014 Inverno em Sochi)</p>
+                    </div>
+                </div>
+                
+                <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+                <table class="medal-table">
+                    <tr>
+                        <th>Ouro</th>
+                        <th>Prata</th>
+                        <th>Bronze</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td class="highlight">395</td>
+                        <td>319</td>
+                        <td>296</td>
+                        <td>1.010</td>
+                    </tr>
+                </table>
+                
+                <div class="top-athletes">
+                    <h3>Maiores Atletas</h3>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Larissa_Latynina_1964.jpg/220px-Larissa_Latynina_1964.jpg" alt="Larisa Latynina" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Larisa Latynina</h3>
+                            <p class="athlete-sport">Ginástica</p>
+                            <p class="athlete-medals"><span class="gold">9 ouros</span>, <span class="silver">5 pratas</span>, <span class="bronze">4 bronzes</span></p>
+                            <p>Detentora do recorde de mais medalhas olímpicas por 48 anos (1956-1964).</p>
+                        </div>
+                    </div>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Alexander_Karelin_2018.jpg/220px-Alexander_Karelin_2018.jpg" alt="Alexander Karelin" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Alexander Karelin</h3>
+                            <p class="athlete-sport">Luta Greco-Romana</p>
+                            <p class="athlete-medals"><span class="gold">3 ouros</span>, <span class="silver">1 prata</span></p>
+                            <p>Invicto por 13 anos, conhecido como "O Urso Russo" e "O Experimentador".</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="memorable-moments">
+                    <h3>Momentos Memoráveis</h3>
+                    <div class="moment-card">
+                        <span class="moment-year">1956 Melbourne</span>
+                        <h3>Domínio Soviético</h3>
+                        <p>A URSS liderou pela primeira vez o quadro de medalhas, marcando o início de sua hegemonia esportiva durante a Guerra Fria.</p>
+                    </div>
+                    <div class="moment-card">
+                        <span class="moment-year">1972 Munique</span>
+                        <h3>Final polêmica de basquete</h3>
+                        <p>O time soviético venceu os EUA em uma final controversa, com uma reposição de bola nos últimos segundos que gerou protestos.</p>
+                    </div>
+                    <div class="moment-card">
+                        <span class="moment-year">2014 Sochi</span>
+                        <h3>Jogos de Inverno em casa</h3>
+                        <p>A Rússia sediou seus primeiros Jogos de Inverno, liderando o quadro de medalhas, mas posteriormente envolveu-se em escândalo de doping.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="germany">
+            <div class="country-detail">
+                <div class="country-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/1200px-Flag_of_Germany.svg.png" alt="Bandeira Alemanha" class="country-flag-large">
+                    <h2 class="country-name-large">Alemanha</h2>
+                </div>
+                
+                <div class="country-info-grid">
+                    <div class="info-card">
+                        <h3>Primeira Participação</h3>
+                        <p>1896</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Total de Medalhas</h3>
+                        <p>855 (Verão) + 468 (Inverno)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Esportes Dominantes</h3>
+                        <p>Canoagem, Atletismo, Hipismo, Remo</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Sedes Olímpicas</h3>
+                        <p>2 vezes (1936 Verão em Berlim, 1972 Verão em Munique)</p>
+                    </div>
+                </div>
+                
+                <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+                <table class="medal-table">
+                    <tr>
+                        <th>Ouro</th>
+                        <th>Prata</th>
+                        <th>Bronze</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td class="highlight">283</td>
+                        <td>282</td>
+                        <td>290</td>
+                        <td>855</td>
+                    </tr>
+                </table>
+                
+                <div class="top-athletes">
+                    <h3>Maiores Atletas</h3>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Birgit_Fischer_2007.jpg/220px-Birgit_Fischer_2007.jpg" alt="Birgit Fischer" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Birgit Fischer</h3>
+                            <p class="athlete-sport">Canoagem</p>
+                            <p class="athlete-medals"><span class="gold">8 ouros</span>, <span class="silver">4 pratas</span></p>
+                            <p>Maior medalhista alemã, competiu em 6 Olimpíadas entre 1980 e 2004.</p>
+                        </div>
+                    </div>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Usain_Bolt_after_4_x_100m_relay_final_-_2012_Summer_Olympics.jpg/220px-Usain_Bolt_after_4_x_100m_relay_final_-_2012_Summer_Olympics.jpg" alt="Armin Hary" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Armin Hary</h3>
+                            <p class="athlete-sport">Atletismo</p>
+                            <p class="athlete-medals"><span class="gold">2 ouros</span></p>
+                            <p>Primeiro homem a correr os 100m em 10.0s e único a vencer 100m e 4x100m em 1960.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="memorable-moments">
+                    <h3>Momentos Memoráveis</h3>
+                    <div class="moment-card">
+                        <span class="moment-year">1936 Berlim</span>
+                        <h3>Jogos da Propaganda</h3>
+                        <p>Hitler usou os Jogos para promover a ideologia nazista, mas foi desafiado pelas vitórias de Jesse Owens e outros atletas não-arianos.</p>
+                    </div>
+                    <div class="moment-card">
+                        <span class="moment-year">1972 Munique</span>
+                        <h3>Massacre Olímpico</h3>
+                        <p>Terroristas palestinos invadiram a Vila Olímpica, matando 11 atletas israelenses, em um dos momentos mais sombrios da história olímpica.</p>
+                    </div>
+                    <div class="moment-card">
+                        <span class="moment-year">2016 Rio</span>
+                        <h3>Ouro no futebol</h3>
+                        <p>A seleção alemã masculina conquistou seu primeiro ouro olímpico no futebol, derrotando o Brasil nas penalidades na final.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="uk">
+            <div class="country-detail">
+                <div class="country-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png" alt="Bandeira Reino Unido" class="country-flag-large">
+                    <h2 class="country-name-large">Reino Unido</h2>
+                </div>
+                
+                <div class="country-info-grid">
+                    <div class="info-card">
+                        <h3>Primeira Participação</h3>
+                        <p>1896</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Total de Medalhas</h3>
+                        <p>851 (Verão) + 32 (Inverno)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Esportes Dominantes</h3>
+                        <p>Ciclismo, Remo, Atletismo, Vela</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Sedes Olímpicas</h3>
+                        <p>3 vezes (1908, 1948 e 2012 em Londres)</p>
+                    </div>
+                </div>
+                
+                <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+                <table class="medal-table">
+                    <tr>
+                        <th>Ouro</th>
+                        <th>Prata</th>
+                        <th>Bronze</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td class="highlight">263</td>
+                        <td>295</td>
+                        <td>293</td>
+                        <td>851</td>
+                    </tr>
+                </table>
+                
+                <div class="top-athletes">
+                    <h3>Maiores Atletas</h3>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Jason_Kenny_2016.jpg/220px-Jason_Kenny_2016.jpg" alt="Jason Kenny" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Jason Kenny</h3>
+                            <p class="athlete-sport">Ciclismo</p>
+                            <p class="athlete-medals"><span class="gold">7 ouros</span>, <span class="silver">2 pratas</span></p>
+                            <p>Maior medalhista britânico, especialista em provas de pista.</p>
+                        </div>
+                    </div>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Steve_Redgrave_2012.jpg/220px-Steve_Redgrave_2012.jpg" alt="Steve Redgrave" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Steve Redgrave</h3>
+                            <p class="athlete-sport">Remo</p>
+                            <p class="athlete-medals"><span class="gold">5 ouros</span>, <span class="bronze">1 bronze</span></p>
+                            <p>Único remador a ganhar ouro em 5 Olimpíadas consecutivas (1984-2000).</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="memorable-moments">
+                    <h3>Momentos Memoráveis</h3>
+                    <div class="moment-card">
+                        <span class="moment-year">1908 Londres</span>
+                        <h3>Domínio Britânico</h3>
+                        <p>O Reino Unido conquistou 56 medalhas de ouro, seu melhor desempenho na história, aproveitando a vantagem de ser sede.</p>
+                    </div>
+                    <div class="moment-card">
+                        <span class="moment-year">2012 Londres</span>
+                        <h3>Super Saturday</h3>
+                        <p>Em 45 minutos, o Reino Unido conquistou 3 ouros no atletismo (Jessica Ennis, Greg Rutherford e Mo Farah), em um dos dias mais gloriosos do esporte britânico.</p>
+                    </div>
+                    <div class="moment-card">
+                        <span class="moment-year">2016 Rio</span>
+                        <h3>Segundo lugar histórico</h3>
+                        <p>O Reino Unido terminou em segundo no quadro de medalhas, seu melhor desempenho desde 1908, superando a China.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="china">
+            <div class="country-detail">
+                <div class="country-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1200px-Flag_of_the_People%27s_Republic_of_China.svg.png" alt="Bandeira China" class="country-flag-large">
+                    <h2 class="country-name-large">China</h2>
+                </div>
+                
+                <div class="country-info-grid">
+                    <div class="info-card">
+                        <h3>Primeira Participação</h3>
+                        <p>1932 (como República da China), 1984 (como RPC)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Total de Medalhas</h3>
+                        <p>546 (Verão) + 77 (Inverno)</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Esportes Dominantes</h3>
+                        <p>Tênis de Mesa, Badminton, Saltos Ornamentais, Halterofilismo</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Sedes Olímpicas</h3>
+                        <p>2 vezes (2008 Verão em Pequim, 2022 Inverno em Pequim)</p>
+                    </div>
+                </div>
+                
+                <h3>Quadro de Medalhas (Jogos de Verão)</h3>
+                <table class="medal-table">
+                    <tr>
+                        <th>Ouro</th>
+                        <th>Prata</th>
+                        <th>Bronze</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td class="highlight">224</td>
+                        <td>167</td>
+                        <td>155</td>
+                        <td>546</td>
+                    </tr>
+                </table>
+                
+                <div class="top-athletes">
+                    <h3>Maiores Atletas</h3>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Wu_Minxia_2012.jpg/220px-Wu_Minxia_2012.jpg" alt="Wu Minxia" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Wu Minxia</h3>
+                            <p class="athlete-sport">Saltos Ornamentais</p>
+                            <p class="athlete-medals"><span class="gold">5 ouros</span>, <span class="silver">1 prata</span>, <span class="bronze">1 bronze</span></p>
+                            <p>Maior medalhista chinesa, dominou os saltos sincronizados e individuais.</p>
+                        </div>
+                    </div>
+                    <div class="athlete-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Lin_Dan_2013.jpg/220px-Lin_Dan_2013.jpg" alt="Lin Dan" class="athlete-img">
+                        <div class="athlete-info">
+                            <h3>Lin Dan</h3>
+                            <p class="athlete-sport">Badminton</p>
+                            <p class="athlete-medals"><span class="gold">2 ouros</span></p>
+                            <p>Considerado o maior jogador de badminton de todos os tempos, bicampeão olímpico.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="memorable-moments">
+                    <h3>Momentos Memoráveis</h3>
+                    <div class="moment-card">
+                        <span class="moment-year">1984 Los Angeles</span>
+                        <h3>Primeiro ouro chinês</h3>
+                        <p>Xu Haifeng venceu a prova de tiro esportivo, conquistando a primeira medalha de ouro da China em Olimpíadas.</p>
+                    </div>
+                    <div class="moment-card">
+                        <span class="moment-year">2008 Pequim</span>
+                        <h3>Jogos da Ascensão</h3>
+                        <p>A China liderou o quadro de medalhas pela primeira vez, com uma cerimônia de abertura espetacular que anunciou
+                            <footer>
+    <div class="container footer-content">
+        <p>historico do nosso pais</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <a href="brasil.html" class="back-btn">Conheça o Brasil nas olimpiedas</a>
+</footer>
